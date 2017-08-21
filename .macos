@@ -1,9 +1,10 @@
 #!/bin/bash
 
-###########################################################
-# macOS System Configuration                              #
-# Thanks to Mathias Bynens' .macOS https://mths.be/macos  #
-###########################################################
+############################################################
+# macOS system and default applications configuration      #
+# Thanks to Mathias Bynens' .macos (https://mths.be/macos) #
+# and various other .dotfile blogs and repositories        #
+############################################################
 
 # Close any open System Preferences panes
 osascript -e 'tell application "System Preferences" to quit'
@@ -28,15 +29,22 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 defaults write NSGlobalDomain AppleScrollerPagingBehavior -bool true
 
 ##########################################
+# System Preferences: Screensaver        #
+##########################################
+
+# Never show screensaver
+defaults -currentHost write com.apple.screensaver idleTime -int 0
+
+##########################################
 # System Preferences: Dock               #
 ##########################################
 
 # Tilesize
-defaults write com.apple.dock tilesize -float 35
+defaults write com.apple.dock tilesize -float 36
 # Turn magnification on
 defaults write com.apple.dock magnification -bool true
 # Magnified tilesize
-defaults write com.apple.dock largesize -float 75
+defaults write com.apple.dock largesize -float 72
 # Minimize windows into application icon
 defaults write com.apple.dock minimize-to-application -bool true
 # Show indicators for open applications
@@ -60,8 +68,34 @@ defaults write com.apple.dashboard dashboard-enabled-state -int 1
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -float 0
-# Allow apps downloaded from: Anywhere (Gatekeeper)
+# Allow apps downloaded from: Anywhere (Note: this disables Gatekeeper completely!)
 sudo spctl --master-disable
+
+##########################################
+# System Preferences: Notifications      #
+##########################################
+
+# Enable Do Not Disturb 'When the display is sleeping'
+defaults -currentHost write com.apple.notificationcenterui dndEnabledDisplaySleep -bool true
+# Enable Do Not Disturb 'When mirroring to TVs and projectors'
+defaults -currentHost write com.apple.notificationcenterui dndMirroring -bool true
+# Enable Do Not Disturb between 22:00 and 07:00 (values are number of minutes since 00:00)
+defaults -currentHost write com.apple.notificationcenterui dndStart -float 1320
+defaults -currentHost write com.apple.notificationcenterui dndEnd -float 420
+
+##########################################
+# System Preferences: Keyboard           #
+##########################################
+
+# Disable correct spelling automatically
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+# Disable smart quotes
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+# Disable smart dashes
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+# Set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 ##########################################
 # System Preferences: Mouse              #
@@ -72,7 +106,7 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 # Set Tracking speed
 defaults write NSGlobalDomain com.apple.mouse.scaling -float 1.5
 # Set Scrolling speed
-defaults write NSGlobalDOmain com.apple.mouse.scrollwheel.scaling -float 0.5
+defaults write NSGlobalDomain com.apple.mouse.scrollwheel.scaling -float 0.5
 
 ##########################################
 # System Preferences: Trackpad           #
@@ -84,9 +118,73 @@ defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 ##########################################
+# Finder                                 #
+##########################################
+
+# Show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+# Show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+# Enable spring loading for directories
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+# Remove the spring loading delay for directories
+defaults write NSGlobalDomain com.apple.springing.delay -float 0
+# Avoid creating .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# Enable snap-to-grid for icons on the desktop and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+# Use list view in all Finder windows by default
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+# Show the ~/Library folder
+chflags nohidden ~/Library
+# Show the /Volumes folder
+sudo chflags nohidden /Volumes
+# Sort folders on top
+defaults write com.apple.finder "_FXSortFoldersFirst" -bool true
+
+##########################################
+# Safari                                 #
+##########################################
+
+# Open Safari with a new window
+defaults write com.apple.Safari AlwaysRestoreSessionAtLaunch -bool false
+defaults write com.apple.Safari OpenPrivateWindowWhenNotRestoringSessionAtLaunch -bool false
+# New window opens with Homepage
+defaults write com.apple.Safari NewWindowBehavior -int 0
+# New tab opens with Empty Page
+defaults write com.apple.Safari NewTabBehavior -int 1
+# Always allow cookies and website data
+defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy" -int 0
+defaults write com.apple.Safari WebKitStorageBlockingPolicy -int 0
+defaults write com.apple.Safari BlockStoragePolicy -int 0
+# Disable pre-loading top hits in background
+defaults write com.apple.Safari PreloadTopHit -bool false
+# Show the full URL in the address bar (note: this still hides the scheme)
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+# Prevent Safari from opening ‘safe’ files automatically after downloading
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+# Show favorites/bookmarks bar by default
+defaults write com.apple.Safari ShowFavoritesBar -bool true
+defaults write com.apple.Safari "ShowFavoritesBar-v2" -bool true
+# Enable Safari’s debug menu
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+# Enable the Develop menu and the Web Inspector
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+# Disable asking for permission to send push notifications
+defaults write com.apple.Safari CanPromptForPushNotifications -bool false
+# Do not Show toolbar in full screen
+defaults write com.apple.Safari AutoShowToolbarInFullScreen -bool true
+
+##########################################
 # Various                                #
 ##########################################
 
+# Disable shadow in screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
@@ -97,3 +195,9 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Never go into computer sleep mode
 sudo systemsetup -setcomputersleep Off > /dev/null
+
+for app in "Dock" "Finder" "Safari" "SystemUIServer" "NotificationCenter"; do
+    killall "${app}" &> /dev/null
+done
+
+echo "macOS System Configuration is done. Some of these modifications might require a restart."
