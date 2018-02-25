@@ -205,9 +205,6 @@ for app in "Dock" "Finder" "Safari" "SystemUIServer" "NotificationCenter"; do
     killall "${app}" &> /dev/null
 done
 
-# Enable zsh syntax highlighting
-echo "source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
-
 echo ""
 echo "macOS System Configuration is done. Some of these modifications might require a restart."
 echo ""
