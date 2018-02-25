@@ -200,6 +200,9 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Never go into computer sleep mode
 sudo systemsetup -setcomputersleep Off > /dev/null
+# Disable default Apache webserver
+sudo apachectl stop
+sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
 
 for app in "Dock" "Finder" "Safari" "SystemUIServer" "NotificationCenter"; do
     killall "${app}" &> /dev/null

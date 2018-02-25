@@ -43,6 +43,7 @@ readonly FORMULAE=(
     "watch"
     "tree"
     "rename"
+    "httpd"
 )
 
 for formula in "${FORMULAE[@]}"; do
@@ -99,6 +100,8 @@ done
 
 brew install findutils --with-default-names # brew doesn't like the argument within a string up top
 brew install maven # can only be installed after cask java has been installed
+
+brew services start httpd # run httpd as a service
 
 # Cleanup
 brew cleanup
