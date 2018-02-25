@@ -7,6 +7,9 @@
 #        to this file                                     #
 ###########################################################
 
+# Source: https://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
+DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Set and use iTerm2 preferences folder
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Projects/dotfiles/preferences"
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${DOTFILES_DIR}/preferences"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
