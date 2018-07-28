@@ -27,6 +27,7 @@ brew tap caskroom/cask
 brew tap caskroom/fonts
 brew tap caskroom/drivers
 brew tap caskroom/versions
+brew tap pivotal/tap
 
 # Install formulae
 readonly FORMULAE=(
@@ -44,6 +45,9 @@ readonly FORMULAE=(
     "tree"
     "rename"
     "httpd"
+    "inetutils"
+    "springboot"
+    "mysql@5.7"
 )
 
 for formula in "${FORMULAE[@]}"; do
@@ -55,43 +59,34 @@ readonly CASKS=(
     "google-chrome"
     "firefox"
     "microsoft-office"
-    "fantastical"
     "1password"
     "dropbox"
-    "transmit"
     "vlc"
     "appcleaner"
     "beamer"
     "macpass"
-    "vmware-fusion8"
+    "vmware-fusion"
     "spotify"
     "spotify-notifications"
     "whatsapp"
-    "skype"
     "dash"
     "iterm2"
     "paw"
-    "hipchat"
     "sourcetree"
     "visual-studio-code"
     "java"
     "java8"
     "jd-gui"
-    "intellij-idea"
-    "datagrip"
-    "phpstorm"
-    "pycharm"
-    "font-source-code-pro"
-    "font-inconsolata-g-for-powerline"
+    "jetbrains-toolbox"
+    "font-fira-code"
     "transmission"
     "apache-directory-studio"
     "docker"
-    "slack"
-    "staruml"
     "logitech-options"
     "nzbvortex"
-    "mysqlworkbench"
     "toggl"
+    "royal-tsx"
+    "microsoft-teams"
 )
 
 for cask in "${CASKS[@]}"; do
@@ -116,7 +111,7 @@ fi;
 echo ""
 echo "Installation of brew, formulae and casks is done."
 echo ""
-echo "Remember to manually install Norton Security, Royal TSX and reboot for Logitech Options."
+echo "Remember to manually install Norton Security and reboot for Logitech Options."
 echo ""
 echo "oh-my-zsh will now be installed and will switch shell"
 echo ""

@@ -15,13 +15,12 @@ if ! hash mas 2>/dev/null; then
 fi
 
 readonly APPS=(
-    1295203466  # Microsoft Remote Desktop
     417375580   # BetterSnapTool
-    918858936   # Airmail 3
     937984704   # Amphetamine
     1026566364  # GoodNotes
+    568494494   # Pocket
+    585829637   # Todoist
     557168941   # Tweetbot
-    410628904   # Wunderlist
 )
 
 for app in "${APPS[@]}"
