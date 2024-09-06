@@ -1,0 +1,5 @@
+name: ephemeral 
+root: <%= @settings["workdir"] %>
+
+windows:
+  - nvim: nvim -c ':Telescope find_files' 
