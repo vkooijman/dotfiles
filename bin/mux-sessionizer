@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+PROJECTS="/Users/vincentk/Projects"
+
+if [[ $# -eq 1 ]]; then
+  project=$1
+else
+  project=`find ${PROJECTS}/* -mindepth 1 -maxdepth 1 -type d | while read p; do zoxide query -l -a -s "${p}"; done | sort -rnk1 | uniq | awk '{print $2}' | sed "s+${PROJECTS}/++" | fzf --height ~50% --layout reverse --border --tmux center`
+fi
+
+if [[ -z ${project} ]]; then
+  exit 0
+fi
+
+project_name=`basename ${project}`
+
+if $(tmuxinator list -n | tail -n +2 | grep -xq "${project_name}"); then
+  tmuxinator start ${project_name} # start or attach tmuxinator specific project for selected
+else
+  tmuxinator start ephemeral -n ${project_name} workdir=${PROJECTS}/${project} # start or attach tmuxinator ephemeral project with name to allow multiple instances of ephemeral
+fi
