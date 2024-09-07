@@ -1,0 +1,16 @@
+name: higem-ui
+root: ~/Projects/HiGem/higem-ui
+
+windows:
+  - ui: nvim -c ':Telescope find_files'
+  - cdk:
+      root: ~/Projects/HiGem/higem-ui-cdk
+      layout: main-vertical
+      panes:
+        - nvim -c ':Telescope find_files'
+        - ll
+  - server: 
+      layout: main-vertical
+      panes:
+        - ./bin/dev
+        - tail -f ./log/development.log
