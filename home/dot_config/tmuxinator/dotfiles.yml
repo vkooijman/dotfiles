@@ -1,5 +1,5 @@
 name: dotfiles
-root: ~/.config
+root: ~/.local/share/chezmoi
 
 windows:
   - nvim: nvim -c ':Telescope find_files' 

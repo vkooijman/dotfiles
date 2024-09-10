@@ -43,6 +43,7 @@ alias lg='lazygit'
 alias ld='lazydocker'
 alias cat='bat'
 alias mux='tmuxinator'
+alias cm='chezmoi'
 
 alias l='ls -lh --group-directories-first'
 alias ll='ls -lah --group-directories-first'

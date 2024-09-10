@@ -1,0 +1,7 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# Install Homebrew
+(echo "🍺 Checking for Homebrew..." && command -v brew >/dev/null 2>&1 && echo "🍺 Homebrew found! Continuing..." ) || \
+  (echo "🍺 Installing Homebrew..." && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
+{{ end }}
