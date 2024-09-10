@@ -15,11 +15,6 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Generate an RSA SSH key
-if [ ! -f ~/.ssh/id_rsa ]; then
-    ssh-keygen -t rsa
-fi
-
 ##########################################
 # System Preferences: General            #
 ##########################################
