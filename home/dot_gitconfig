@@ -1,3 +1,21 @@
 [user]
 	name = Vincent Kooijman
 	email = vincent.kooijman@outlook.com
+
+[includeIf "gitdir:~/Projects/OnMarc/"]
+  path = .gitconfig-onmarc
+
+[include]
+  path = ~/.config/delta/themes/catppuccin.gitconfig
+
+[core]
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  features = catppuccin-macchiato
+  dark = true
+  line-numbers = true
+  navigate = true

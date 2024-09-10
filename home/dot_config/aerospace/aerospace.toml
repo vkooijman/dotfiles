@@ -1,7 +1,5 @@
 start-at-login = true
-
 accordion-padding = 20
-
 key-mapping.preset = 'qwerty'
 
 [gaps]
@@ -44,8 +42,12 @@ alt-9 = 'workspace 9'
 alt-0 = 'workspace 0'
 
 alt-a = 'workspace A' # (A)rc 
+alt-c = 'workspace C' # (C)alendar + Microsoft To Do
+alt-m = 'workspace M' # (M)ail
+alt-o = 'workspace O' # Microsoft (O)utlook
 alt-r = 'workspace R' # (R)ubyMine
 alt-t = 'workspace T' # Wez(T)erm
+alt-v = 'workspace V' # (V)isual Studio Code
 
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
@@ -58,9 +60,13 @@ alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-0 = 'move-node-to-workspace 0'
 
-alt-shift-a = 'move-node-to-workspace A' # (A)rc
-alt-shift-r = 'move-node-to-workspace R' # (R)ubyMine
-alt-shift-t = 'move-node-to-workspace T' # Wez(T)erm
+alt-shift-a = 'move-node-to-workspace A'
+alt-shift-c = 'move-node-to-workspace C'
+alt-shift-m = 'move-node-to-workspace M'
+alt-shift-o = 'move-node-to-workspace O'
+alt-shift-r = 'move-node-to-workspace R'
+alt-shift-t = 'move-node-to-workspace T'
+alt-shift-v = 'move-node-to-workspace V'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -68,15 +74,33 @@ alt-tab = 'workspace-back-and-forth'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 alt-shift-f = 'fullscreen'
-alt-shift-m = 'macos-native-fullscreen'
 
-[[on-window-detected]]
-check-further-callbacks = true
-run = 'layout floating'
+# See: https://nikitabobko.github.io/AeroSpace/commands#mode
+alt-shift-semicolon = 'mode service'
 
 [[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
 run = 'move-node-to-workspace A'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
+run = 'move-node-to-workspace C'
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.to-do-mac'
+run = 'move-node-to-workspace C'
+
+[[on-window-detected]]
+if.app-id = 'ch.protonmail.desktop'
+run = 'move-node-to-workspace M'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = 'move-node-to-workspace M'
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.Outlook'
+run = 'move-node-to-workspace O'
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.rubymine'
@@ -86,19 +110,19 @@ run = 'move-node-to-workspace R'
 if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace T'
 
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = 'move-node-to-workspace V'
+
 # move all other apps to workspace 0 by default
 [[on-window-detected]]
-run = 'move-node-to-workspace 0'
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#mode
-alt-shift-semicolon = 'mode service'
+run = ['layout floating', 'move-node-to-workspace 0']
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
-#s = ['layout sticky tiling', 'mode main'] # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
