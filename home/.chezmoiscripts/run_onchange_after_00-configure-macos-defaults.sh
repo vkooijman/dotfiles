@@ -145,41 +145,6 @@ sudo chflags nohidden /Volumes
 defaults write com.apple.finder "_FXSortFoldersFirst" -bool true
 
 ##########################################
-# Safari                                 #
-##########################################
-
-# Open Safari with a new window
-defaults write com.apple.Safari AlwaysRestoreSessionAtLaunch -bool false
-defaults write com.apple.Safari OpenPrivateWindowWhenNotRestoringSessionAtLaunch -bool false
-# New window opens with Homepage
-defaults write com.apple.Safari NewWindowBehavior -int 0
-# New tab opens with Empty Page
-defaults write com.apple.Safari NewTabBehavior -int 1
-# Always allow cookies and website data
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy" -int 0
-defaults write com.apple.Safari WebKitStorageBlockingPolicy -int 0
-defaults write com.apple.Safari BlockStoragePolicy -int 0
-# Disable pre-loading top hits in background
-defaults write com.apple.Safari PreloadTopHit -bool false
-# Show the full URL in the address bar (note: this still hides the scheme)
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
-# Prevent Safari from opening ‘safe’ files automatically after downloading
-defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
-# Show favorites/bookmarks bar by default
-defaults write com.apple.Safari ShowFavoritesBar -bool true
-defaults write com.apple.Safari "ShowFavoritesBar-v2" -bool true
-# Enable Safari’s debug menu
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-# Enable the Develop menu and the Web Inspector
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-# Disable asking for permission to send push notifications
-defaults write com.apple.Safari CanPromptForPushNotifications -bool false
-# Do not Show toolbar in full screen
-defaults write com.apple.Safari AutoShowToolbarInFullScreen -bool true
-
-##########################################
 # Various                                #
 ##########################################
 
