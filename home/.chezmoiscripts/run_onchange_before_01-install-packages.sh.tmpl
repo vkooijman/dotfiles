@@ -1,7 +1,7 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
-brew bundle --no-lock --file=/dev/stdin <<EOF
+/opt/homebrew/bin/brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range .packages.darwin.taps -}}
 tap {{ . | quote }}
 {{ end -}}
@@ -15,4 +15,4 @@ cask {{ . | quote }}
 mas {{ .name | quote }}, id: {{ .id }}
 {{ end }}
 EOF
-{{ end -}}  
+{{ end -}}
