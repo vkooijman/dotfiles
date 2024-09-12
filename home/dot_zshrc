@@ -4,13 +4,13 @@ FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions":$FPATH
 
 source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ${HOMEBREW_PREFIX}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+#source ${HOMEBREW_PREFIX}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-# Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+if [[ ! -e ~/.zsh/zsh-autocomplete ]]; then
+  git clone --depth 1 --branch 23.07.13 https://github.com/marlonrichert/zsh-autocomplete ~/.zsh/zsh-autocomplete
+fi
+
+source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # Set prompt to Pure
 autoload -U promptinit; promptinit
